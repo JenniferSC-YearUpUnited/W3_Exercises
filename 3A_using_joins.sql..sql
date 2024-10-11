@@ -22,9 +22,23 @@ ORDER BY Productname;
 
 SELECT products.ProductID, products.ProductName, products.UnitPrice, categories.CategoryName, suppliers.CompanyName
 FROM products
-JOIN categories ON products. CategoryID = Categories.CategoryID
+JOIN categories ON products.CategoryID = Categories.CategoryID
 JOIN suppliers ON products.SupplierID = suppliers.SupplierID 
 ORDER BY ProductName;
 
 ## List the order id, ship name, ship address, and shipping company name of every order that shipped to Germany ##
-SELECT orders.OrderID,  
+SELECT orders.OrderID, orders.ShipName, orders.ShipAddress, shippers.CompanyName
+FROM orders
+JOIN shippers ON orders.ShipVia = shippers.ShipperID
+WHERE ShipCountry = 'Germany';
+
+## List the order id, order date, ship name, ship address of all orders that ordered  "Sasquatch Ale" ## 
+##order details ProductID ## 
+## ProductID ProductName ## 
+## NEED HELP## 
+SELECT orders.OrderID, orders.OrderDate, orders.ShipName, orders.ShipAddress, order details.ProductID,products.ProductName
+FROM orders
+JOIN order details ON orders.OrderID = order details.ProductID  
+JOIN products ON orders.ProductID = products.ProductName
+WHERE ProductName = 'Sasqatch Ale'; 
+
