@@ -16,12 +16,44 @@ SELECT SUM(Salary) AS 'TotalSalary'
 FROM employees; 
 
 ## Which employee makes the highest salary, and which employee makes the lowest? ## 
-## NEED HELP ## 
-SELECT EmployeeID, MAX(Salary) AS 'HighestPayer', MIN(Salary) AS 'LowestPayer'
+SELECT FirstName, LastName, Salary, (SELECT MAX(Salary) FROM employees) As 'High&LowSalary'
 FROM employees
-GROUP BY EmployeeID
-HAVING MAX(Salary)= 3119.15 AND MIN(Salary)= 1744.21;
+WHERE FirstName = "Janet"
+UNION
+SELECT FirstName, LastName, Salary As'LowestPaid',
+(SELECT MIN(Salary) FROM employees)
+FROM employees
+WHERE Salary < 1744.21;
+
+## What is the supplier ID of each supplier and the number of items they supply? You can answer this query by only looking at the products table. ## 
+SELECT SupplierID, COUNT(DISTINCT QuantityPerUnit) AS 'TotalItems' 
+FROM products
+GROUP BY SupplierID;
+
+
+
+## What is the category ID of each category and the average price of each item in the category? (You can answer this query by only looking at the products table.) ##
+SELECT CategoryID, AVG(UnitPrice) AS 'AvgPrice'
+FROM products
+GROUP BY CategoryID; 
  
+## For suppliers that provide at least 5 items to Northwind, what is the supplier ID of each supplier and the number of items they supply? (Again, you can answer this query by only looking at the products table.) ## 
+## Come Back to this ONE ## 
+SELECT SupplierID, COUNT(DISTINCT QuantityPerUnit) AS ' TotalItems' 
+FROM products
+WHERE QuantityPerUnit >=5
+GROUP BY SupplierID; 
+
+##List the product id, product name, and inventory value (calculated by multiplying unit 
+price by the number of units on hand). Sort the results in descending order by value. If 
+two or more have the same value, order by product name ##
+
+## Come BACK to this ONE ## 
+SELECT products.ProductID, products.ProductName, (UnitPrice*UnitsinStock) AS 'InventValue'
+FROM products
+ORDER BY 'InventValue'; 
+
+
 
 
 
