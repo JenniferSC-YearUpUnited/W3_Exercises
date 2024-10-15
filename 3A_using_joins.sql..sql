@@ -5,7 +5,7 @@
 
 SELECT products.ProductID, products.ProductName, products.UnitPrice, categories.CategoryName
 FROM products 
-INNER JOIN categories 
+JOIN categories 
 ON products.CategoryID = categories.CategoryID
 ORDER BY CategoryName, ProductName;
 
@@ -35,10 +35,16 @@ WHERE ShipCountry = 'Germany';
 ## List the order id, order date, ship name, ship address of all orders that ordered  "Sasquatch Ale" ## 
 ##order details ProductID ## 
 ## ProductID ProductName ## 
-## NEED HELP## 
-SELECT orders.OrderID, orders.OrderDate, orders.ShipName, orders.ShipAddress, order details.ProductID,products.ProductName
+
+SELECT orders.OrderID, orders.OrderDate, orders.ShipName, orders.ShipAddress, orderdetails.OrderID
 FROM orders
-JOIN order details ON orders.OrderID = order details.ProductID  
-JOIN products ON orders.ProductID = products.ProductName
-WHERE ProductName = 'Sasqatch Ale'; 
+JOIN orderdetails ON orders.OrderID = orderdetails.OrderID
+WHERE ProductID = "34"; 
+
+
+
+
+
+
+
 
